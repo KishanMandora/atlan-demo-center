@@ -1,5 +1,10 @@
 ---
+import type { EntryFieldTypes } from 'contentful';
+import '../styles/global.css';
+import Layout from '@/layouts/Layout.astro';
+import { contentfulClient } from '@/lib/contentful';
 const title = 'Atlan Demo Center';
+import DemosGrid from '@/components/DemosGrid.vue';
 ---
 
 <html lang="en">
@@ -11,6 +16,10 @@ const title = 'Atlan Demo Center';
     <title>{title}</title>
   </head>
   <body>
-    <h1>{title}</h1>
+    <Layout />
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <DemosGrid client:load />
+    </div>
   </body>
 </html>

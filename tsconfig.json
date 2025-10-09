@@ -5,6 +5,9 @@
   "strict": true,
   "compilerOptions": {
     "jsx": "preserve",
-    "paths": {}
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   }
 }
