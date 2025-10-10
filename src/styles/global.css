@@ -127,3 +127,7 @@
     --ring: rgb(32, 38, 210); /* #2026d2 */
   }
 }
+
+@view-transition {
+  navigation: auto;
+}

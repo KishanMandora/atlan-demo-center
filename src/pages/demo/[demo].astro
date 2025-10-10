@@ -1,0 +1,84 @@
+---
+export const prerender = false;
+import { GET } from '@/pages/api/demo/[slug].json';
+import Layout from '@/layouts/Layout.astro';
+
+let response = await GET(Astro);
+const data = await response.json();
+
+console.log('data', data);
+console.log('Astro.params', Astro.params.demo);
+
+let demoData = data.item;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{demoData.title} – Demo</title>
+    <meta name="description" content={demoData.description ?? demoData.title} />
+  </head>
+  <body>
+    <Layout />
+    <main>
+      <h1>{demoData.title}</h1>
+
+      {
+        demoData.thumbnail && (
+          <img
+            src={demoData.thumbnail?.fields?.file?.url ?? demoData.thumbnail}
+            alt={demoData.title}
+            style="max-width: 600px; border-radius: 8px;"
+          />
+        )
+      }
+
+      {demoData.description && <p>{demoData.description}</p>}
+
+      {
+        demoData.videoUrl && (
+          <p>
+            <a href={demoData.videoUrl} target="_blank" rel="noopener">
+              ▶ Watch Video
+            </a>
+          </p>
+        )
+      }
+
+      {
+        demoData.productUrl && (
+          <p>
+            <a href={demoData.productUrl} target="_blank" rel="noopener">
+              🌐 Visit Product Page
+            </a>
+          </p>
+        )
+      }
+
+      {
+        demoData.filterCategory?.length && (
+          <p>
+            <strong>Categories:</strong> {demoData.filterCategory.join(', ')}
+          </p>
+        )
+      }
+
+      {
+        demoData.targetPlatform?.length && (
+          <p>
+            <strong>Platforms:</strong> {demoData.targetPlatform.join(', ')}
+          </p>
+        )
+      }
+
+      {
+        demoData.productCategory?.length && (
+          <p>
+            <strong>Product Category:</strong>{' '}
+            {demoData.productCategory.join(', ')}
+          </p>
+        )
+      }
+    </main>
+  </body>
+</html>

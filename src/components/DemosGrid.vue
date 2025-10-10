@@ -15,21 +15,25 @@
 
     <!-- Demo grid -->
     <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      <article
+      <a
+        :href="`/demo/${demo.title?.toLowerCase().replace(/\s+/g, '-')}`"
         v-for="demo in demos"
         :key="demo.id"
-        class="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition"
       >
-        <img
-          v-if="demo.thumbnail"
-          :src="demo.thumbnail"
-          :alt="demo.title"
-          class="w-full h-40 object-cover rounded-md mb-3"
-          loading="lazy"
-        />
-        <h2 class="text-lg font-semibold">{{ demo.title }}</h2>
-        <p class="text-gray-600 text-sm">{{ demo.description }}</p>
-      </article>
+        <article
+          class="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition"
+        >
+          <img
+            v-if="demo.thumbnail"
+            :src="demo.thumbnail"
+            :alt="demo.title"
+            class="w-full h-40 object-cover rounded-md mb-3"
+            loading="lazy"
+          />
+          <h2 class="text-lg font-semibold">{{ demo.title }}</h2>
+          <p class="text-gray-600 text-sm">{{ demo.description }}</p>
+        </article>
+      </a>
     </div>
   </div>
 </template>
