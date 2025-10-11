@@ -4,24 +4,34 @@ import { contentfulClient } from '@/lib/contentful';
 
 export const GET: APIRoute = async ({ request }) => {
   const url = new URL(request.url);
-  const search = url.searchParams.get('q')?.toLowerCase().trim() ?? '';
+  const search = url.searchParams.get('query')?.toLowerCase().trim() ?? '';
+  const sort = url.searchParams.get('sort')?.trim() ?? '';
 
-  console.log('url', url.searchParams.get('q'));
   console.log('search', search);
 
-  const entries = await contentfulClient.getEntries({ content_type: 'demo' });
+  const entries = await contentfulClient.getEntries({
+    content_type: 'demo',
+    order: [`-fields.${sort}`],
+    // 'fields.duration[gt]': 15,
+    // 'fields.duration[lt]': 30,
+    // 'fields.filters[in]': 'AI',
+    // 'fields.targetPersona[in]': 'General',
+    query: search
+    // limit: 10,
+    // skip: 0
+  });
+
+  console.log(
+    'entries',
+    entries.items.map((e: any) => e.fields.views)
+  );
 
   const items = entries.items
     .map((e: any) => ({
       id: e.sys.id,
       title: e.fields.title,
       description: e.fields.description,
-      videoUrl: e.fields.videoUrl,
-      thumbnail: e.fields.thumbnail,
-      filterCategory: e.fields.filterCategory,
-      targetPlatform: e.fields.targetPlatform,
-      productCategory: e.fields.productCategory,
-      productUrl: e.fields.productUrl
+      ...e.fields
     }))
     .filter((d: any) => {
       const matchSearch =
