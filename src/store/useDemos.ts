@@ -6,6 +6,13 @@ const error = ref<string | null>(null);
 
 const search = ref('');
 const sort = ref<'views' | 'publishedDate'>('publishedDate');
+const duration = ref<'quick' | 'short' | 'medium' | 'long' | 'depth' | 'all'>(
+  'all'
+);
+const filtersData = ref<{ id: string; label: string; count: number }[]>([]);
+const filters = ref<string[]>([]);
+
+console.log('demos in useDemos', demos);
 
 let debounceId: ReturnType<typeof setTimeout> | null = null;
 
@@ -16,10 +23,36 @@ async function fetchDemos(query = search.value) {
     const res = await fetch(
       `/api/demos.json?query=${encodeURIComponent(
         query
-      )}&sort=${encodeURIComponent(sort.value)}`
+      )}&sort=${encodeURIComponent(sort.value)}&duration=${encodeURIComponent(
+        duration.value
+      )}&filters=${encodeURIComponent(filters.value.join(','))}`
     );
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
+
+    if (!filters.value.length) {
+      const filtersResult = (data.items ?? []).reduce(
+        (acc: Record<string, number>, item: any) => {
+          const filters = item.filters || [];
+          filters.forEach((filter: string) => {
+            acc[filter] = (acc[filter] ?? 0) + 1;
+          });
+          return acc;
+        },
+        {}
+      );
+
+      filtersData.value = Object.entries(filtersResult)
+        .map(([filter, count]) => ({
+          id: filter,
+          label: filter,
+          count: count as number
+        }))
+        .sort((a, b) => a.id.localeCompare(b.id));
+    }
+
+    console.log('filtersData', filtersData.value.length);
+
     demos.value = data.items ?? [];
   } catch (e: any) {
     error.value = e?.message ?? 'Failed to load demos';
@@ -34,7 +67,17 @@ watch(search, (query) => {
   debounceId = setTimeout(() => fetchDemos(query), 400);
 });
 
+// combine sort, duration, and filters
 watch([sort], () => {
+  fetchDemos();
+});
+
+watch([duration], () => {
+  fetchDemos();
+});
+
+watch([filters], () => {
+  console.log('filters', filters.value);
   fetchDemos();
 });
 
@@ -47,6 +90,9 @@ export function useDemos() {
     error,
     search,
     sort,
+    duration,
+    filtersData,
+    filters,
     hasResults,
     fetchDemos
   };

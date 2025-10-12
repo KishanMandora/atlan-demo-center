@@ -1,9 +1,9 @@
 ---
-import type { EntryFieldTypes } from 'contentful';
 import Layout from '@/layouts/Layout.astro';
-import { contentfulClient } from '@/lib/contentful';
 const title = 'Atlan Demo Center';
 import DemosGrid from '@/components/DemosGrid.vue';
+import Text from '@/components/ui/Text.vue';
+import Filters from '@/components/Filters.vue';
 ---
 
 <html lang="en">
@@ -16,9 +16,31 @@ import DemosGrid from '@/components/DemosGrid.vue';
   </head>
   <body>
     <Layout />
+    <div
+      class="bg-center bg-cover bg-primary opacity-100 py-15"
+      style="background-image:url(/src/assets/images/hero-bg.svg);"
+    >
+      <Text
+        as="h2"
+        size="text-6xl"
+        color="text-secondary"
+        weight="font-bold"
+        align="text-center"
+        class="w-2/5 mx-auto mt-4"
+      >
+        Experience Atlan in action.
+      </Text>
+    </div>
+    <div class="w-4/5 mx-auto flex bg-white">
+      <div class="w-1/5 px-3">
+        <div class="w-full sticky top-18">
+          <Filters client:load />
+        </div>
+      </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      <DemosGrid client:load />
+      <div class="w-4/5">
+        <DemosGrid client:load />
+      </div>
     </div>
   </body>
 </html>
