@@ -1,6 +1,7 @@
 export const prerender = false;
 import type { APIRoute } from 'astro';
 import { contentfulClient } from '@/lib/contentful';
+import { durationMap } from '@/constants/filtersAndSorts';
 
 export const GET: APIRoute = async ({ request }) => {
   const url = new URL(request.url);
@@ -9,46 +10,17 @@ export const GET: APIRoute = async ({ request }) => {
   const duration = url.searchParams.get('duration')?.trim() ?? '';
   const filters = url.searchParams.get('filters')?.trim() ?? '';
 
-  console.log('filters', filters);
-
-  const durationMap = {
-    quick: {
-      min: 0,
-      max: 15
-    },
-    short: {
-      min: 15,
-      max: 30
-    },
-    medium: {
-      min: 30,
-      max: 45
-    },
-    long: {
-      min: 45,
-      max: 60
-    },
-    depth: {
-      min: 60,
-      max: Number.MAX_SAFE_INTEGER
-    },
-    all: {
-      min: 0,
-      max: Number.MAX_SAFE_INTEGER
-    }
-  };
-
   const durationRange = durationMap[duration as keyof typeof durationMap];
-
-  console.log('durationRange', durationRange);
-
-  // console.log('search', search);
 
   const entries = await contentfulClient.getEntries({
     content_type: 'demo',
-    order: [`-fields.${sort}`],
-    'fields.duration[gt]': durationRange.min,
-    'fields.duration[lt]': durationRange.max,
+    ...(sort ? { order: [`-fields.${sort}`] } : {}),
+    ...(duration
+      ? {
+          'fields.duration[gt]': durationRange.min,
+          'fields.duration[lt]': durationRange.max
+        }
+      : {}),
     ...(filters ? { 'fields.filters[in]': filters } : {}),
     // 'fields.filters[in]': filters,
     // 'fields.targetPersona[in]': 'General',
@@ -56,11 +28,6 @@ export const GET: APIRoute = async ({ request }) => {
     // limit: 10,
     // skip: 0
   });
-
-  console.log(
-    'entries',
-    entries.items.map((e: any) => e.fields.views)
-  );
 
   const items = entries.items
     .map((e: any) => ({

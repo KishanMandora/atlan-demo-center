@@ -70,7 +70,6 @@ const props = withDefaults(
     invalid?: boolean;
   }>(),
   {
-    name: '',
     disabled: false,
     required: false,
     chipClass: '',

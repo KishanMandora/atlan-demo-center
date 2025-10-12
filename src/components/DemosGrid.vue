@@ -3,7 +3,7 @@
     <div
       class="w-full flex gap-2 justify-between items-center sticky top-18 bg-white"
     >
-      <Chips v-model="sort" :items="items" name="sort" />
+      <Chips v-model="sort" :items="sortingChoices" name="sort" />
       <div class="relative w-1/2 items-center">
         <Input
           id="search"
@@ -71,20 +71,7 @@ import { useDemos } from '@/store/useDemos';
 import { Search, X } from 'lucide-vue-next';
 import { Chips } from './ui/chips';
 import { Select } from './molecules/select';
-
-const items = [
-  { value: 'publishedDate', label: 'Latest' },
-  { value: 'views', label: 'Popular' }
-];
-
-const selectDurations = [
-  { value: 'all', label: 'All' },
-  { value: 'quick', label: '0 - 15 minutes' },
-  { value: 'short', label: '15 - 30 minutes' },
-  { value: 'medium', label: '30 - 45 minutes' },
-  { value: 'long', label: '45 - 60 minutes' },
-  { value: 'depth', label: '60+ minutes' }
-];
+import { sortingChoices, selectDurations } from '@/constants/filtersAndSorts';
 
 const {
   demos,

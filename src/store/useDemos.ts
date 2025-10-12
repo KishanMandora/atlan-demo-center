@@ -12,8 +12,6 @@ const duration = ref<'quick' | 'short' | 'medium' | 'long' | 'depth' | 'all'>(
 const filtersData = ref<{ id: string; label: string; count: number }[]>([]);
 const filters = ref<string[]>([]);
 
-console.log('demos in useDemos', demos);
-
 let debounceId: ReturnType<typeof setTimeout> | null = null;
 
 async function fetchDemos(query = search.value) {
@@ -51,8 +49,6 @@ async function fetchDemos(query = search.value) {
         .sort((a, b) => a.id.localeCompare(b.id));
     }
 
-    console.log('filtersData', filtersData.value.length);
-
     demos.value = data.items ?? [];
   } catch (e: any) {
     error.value = e?.message ?? 'Failed to load demos';
@@ -62,7 +58,6 @@ async function fetchDemos(query = search.value) {
 }
 
 watch(search, (query) => {
-  console.log('search', query);
   if (debounceId) clearTimeout(debounceId);
   debounceId = setTimeout(() => fetchDemos(query), 400);
 });
@@ -77,7 +72,6 @@ watch([duration], () => {
 });
 
 watch([filters], () => {
-  console.log('filters', filters.value);
   fetchDemos();
 });
 

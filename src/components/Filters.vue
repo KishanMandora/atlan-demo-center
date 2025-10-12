@@ -1,13 +1,3 @@
-<script setup lang="ts">
-import { ref } from 'vue';
-import CheckboxGroup from './molecules/checkbox-group/CheckboxGroup.vue';
-import { useDemos } from '@/store/useDemos';
-import Text from './ui/Text.vue';
-
-const { filtersData, filters } = useDemos();
-
-console.log('filtersData', filtersData);
-</script>
 <template>
   <div class="w-full py-4 px-3">
     <div>
@@ -17,5 +7,11 @@ console.log('filtersData', filtersData);
     </div>
     <CheckboxGroup :items="filtersData" v-model="filters" />
   </div>
-  <!-- <CheckboxGroup :items="filtersData" :modelValue="filters" /> -->
 </template>
+<script setup lang="ts">
+import CheckboxGroup from '@/components/molecules/checkbox-group/CheckboxGroup.vue';
+import { useDemos } from '@/store/useDemos';
+import Text from '@/components/ui/Text.vue';
+
+const { filtersData, filters } = useDemos();
+</script>

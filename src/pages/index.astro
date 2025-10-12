@@ -1,9 +1,10 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-const title = 'Atlan Demo Center';
 import DemosGrid from '@/components/DemosGrid.vue';
 import Text from '@/components/ui/Text.vue';
 import Filters from '@/components/Filters.vue';
+
+const title = 'Atlan Demo Center';
 ---
 
 <html lang="en">
@@ -21,7 +22,7 @@ import Filters from '@/components/Filters.vue';
       style="background-image:url(/src/assets/images/hero-bg.svg);"
     >
       <Text
-        as="h2"
+        as="h1"
         size="text-6xl"
         color="text-secondary"
         weight="font-bold"
@@ -31,9 +32,9 @@ import Filters from '@/components/Filters.vue';
         Experience Atlan in action.
       </Text>
     </div>
-    <div class="w-4/5 mx-auto flex bg-white">
+    <div class="w-4/5 mx-auto flex">
       <div class="w-1/5 px-3">
-        <div class="w-full sticky top-18">
+        <div class="w-full sticky top-18 bg-white">
           <Filters client:load />
         </div>
       </div>

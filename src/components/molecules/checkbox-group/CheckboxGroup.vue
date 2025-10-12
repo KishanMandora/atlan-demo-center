@@ -1,34 +1,3 @@
-<script setup lang="ts">
-import { Checkbox } from '@/components/ui/checkbox';
-
-type Item = { id: string; label: string; disabled?: boolean; count?: number };
-
-const props = defineProps<{
-  items: Item[];
-  modelValue: string[];
-  label?: string;
-}>();
-
-const emit = defineEmits<{
-  (e: 'update:modelValue', value: string[]): void;
-  (e: 'change', value: string[]): void;
-}>();
-
-function toggleOne(id: string, checked: boolean | 'indeterminate') {
-  const isChecked = checked === true;
-  const filtersSet = new Set(props.modelValue);
-  isChecked ? filtersSet.add(id) : filtersSet.delete(id);
-  const updatedFilters = Array.from(filtersSet);
-
-  emit('update:modelValue', updatedFilters);
-  emit('change', updatedFilters);
-}
-
-function isChecked(id: string) {
-  return props.modelValue.includes(id);
-}
-</script>
-
 <template>
   <div class="space-y-3">
     <h3 v-if="label" class="text-sm font-medium text-muted-foreground">
@@ -64,3 +33,34 @@ function isChecked(id: string) {
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { Checkbox } from '@/components/ui/checkbox';
+
+type Item = { id: string; label: string; disabled?: boolean; count?: number };
+
+const props = defineProps<{
+  items: Item[];
+  modelValue: string[];
+  label?: string;
+}>();
+
+const emit = defineEmits<{
+  (e: 'update:modelValue', value: string[]): void;
+  (e: 'change', value: string[]): void;
+}>();
+
+function toggleOne(id: string, checked: boolean | 'indeterminate') {
+  const isChecked = checked === true;
+  const filtersSet = new Set(props.modelValue);
+  isChecked ? filtersSet.add(id) : filtersSet.delete(id);
+  const updatedFilters = Array.from(filtersSet);
+
+  emit('update:modelValue', updatedFilters);
+  emit('change', updatedFilters);
+}
+
+function isChecked(id: string) {
+  return props.modelValue.includes(id);
+}
+</script>
