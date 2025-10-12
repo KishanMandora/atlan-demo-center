@@ -20,6 +20,9 @@ async function fetchDemos(query = search.value) {
   loading.value = true;
   error.value = null;
   try {
+    const filtersRes = await fetch('/api/filters.json');
+    const filteredData = await filtersRes.json();
+
     const res = await fetch(
       `/api/demos.json?query=${encodeURIComponent(query)}
       &sort=${encodeURIComponent(sort.value)}
@@ -31,8 +34,8 @@ async function fetchDemos(query = search.value) {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
 
-    if (!filters.value.length) {
-      const filtersResult = (data.items ?? []).reduce(
+    if (!filtersData.value.length) {
+      const filtersResult = (filteredData.items ?? []).reduce(
         (acc: Record<string, number>, item: any) => {
           const filters = item.filters || [];
           filters.forEach((filter: string) => {

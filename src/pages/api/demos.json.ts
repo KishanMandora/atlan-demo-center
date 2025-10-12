@@ -30,8 +30,6 @@ export const GET: APIRoute = async ({ request }) => {
     skip: page ? parseInt(page) * 10 : 0
   });
 
-  console.log('entries', entries);
-
   const items = entries.items
     .map((e: any) => ({
       id: e.sys.id,
