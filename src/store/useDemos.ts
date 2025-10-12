@@ -9,6 +9,9 @@ const sort = ref<'views' | 'publishedDate'>('publishedDate');
 const duration = ref<'quick' | 'short' | 'medium' | 'long' | 'depth' | 'all'>(
   'all'
 );
+const display = ref<'grid' | 'list'>(
+  (localStorage.getItem('display') as 'grid' | 'list') || 'grid'
+);
 const filtersData = ref<{ id: string; label: string; count: number }[]>([]);
 const filters = ref<string[]>([]);
 const page = ref(0);
@@ -73,20 +76,13 @@ watch(search, (query) => {
   debounceId = setTimeout(() => fetchDemos(query), 400);
 });
 
-// combine sort, duration, and filters
-watch([sort], () => {
+watch([sort, duration, filters], () => {
   page.value = 0;
   fetchDemos();
 });
 
-watch([duration], () => {
-  page.value = 0;
-  fetchDemos();
-});
-
-watch([filters], () => {
-  page.value = 0;
-  fetchDemos();
+watch(display, (val) => {
+  localStorage.setItem('display', val);
 });
 
 const hasResults = computed(() => !loading.value && demos.value.length > 0);
@@ -104,6 +100,7 @@ export function useDemos() {
     hasResults,
     fetchDemos,
     total,
-    page
+    page,
+    display
   };
 }

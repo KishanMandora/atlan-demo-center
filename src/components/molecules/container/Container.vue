@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-    :class="class"
-  >
+  <div class="flex flex-wrap gap-6" :class="class">
     <slot />
   </div>
 </template>

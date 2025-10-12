@@ -1,7 +1,7 @@
 <template>
   <div class="p-6">
     <div
-      class="w-full flex gap-2 justify-between items-center sticky top-18 bg-white"
+      class="w-full flex gap-2 justify-between items-center sticky top-18 bg-white z-10"
     >
       <Chips v-model="sort" :items="sortingChoices" name="sort" />
       <div class="relative w-1/2 items-center">
@@ -33,6 +33,33 @@
         placeholder="Duration"
         v-model="duration"
       />
+
+      <div class="flex gap-2">
+        <Button
+          variant="outline"
+          size="icon"
+          @click="display = 'grid'"
+          :class="
+            display === 'grid'
+              ? 'bg-primary text-primary-foreground'
+              : 'active:bg-primary active:text-primary-foreground cursor-pointer'
+          "
+        >
+          <LayoutGrid class="w-4 h-4" />
+        </Button>
+        <Button
+          variant="outline"
+          size="icon"
+          @click="display = 'list'"
+          :class="
+            display === 'list'
+              ? 'bg-primary text-primary-foreground'
+              : 'active:bg-primary active:text-primary-foreground cursor-pointer'
+          "
+        >
+          <TextAlignJustify class="w-4 h-4" />
+        </Button>
+      </div>
     </div>
 
     <div v-if="loading" class="text-gray-500">Loading demos…</div>
@@ -44,7 +71,7 @@
     </div>
 
     <div ref="el">
-      <Container class="mt-6">
+      <Container class="mt-6" v-if="display === 'grid'">
         <a
           v-for="demo in demos"
           :key="demo.id"
@@ -57,6 +84,27 @@
             :duration="demo.duration"
             :filters="demo.filters"
             :excerpt="demo.excerpt"
+            :featured="demo.featured"
+            :views="demo.views"
+          />
+        </a>
+      </Container>
+
+      <Container class="mt-6" v-if="display === 'list'">
+        <a
+          v-for="demo in demos"
+          :key="demo.id"
+          :href="`/demo/${demo.title?.toLowerCase().replace(/\s+/g, '-')}`"
+        >
+          <ListCard
+            :title="demo.title"
+            :thumbnail="demo.thumbnail"
+            :publishedDate="demo.publishedDate"
+            :duration="demo.duration"
+            :filters="demo.filters"
+            :excerpt="demo.excerpt"
+            :featured="demo.featured"
+            :views="demo.views"
           />
         </a>
       </Container>
@@ -68,13 +116,19 @@
 import { onMounted, useTemplateRef } from 'vue';
 import { Input } from '@/components/ui/input';
 import { useDemos } from '@/store/useDemos';
-import { Search, X } from 'lucide-vue-next';
+import { LayoutGrid, Search, TextAlignJustify, X } from 'lucide-vue-next';
 import { Chips } from '@/components/ui/chips';
 import { Select } from '@/components/molecules/select';
-import { sortingChoices, selectDurations } from '@/constants/filtersAndSorts';
+import {
+  sortingChoices,
+  selectDurations,
+  displayOptions
+} from '@/constants/filtersAndSorts';
 import Container from '@/components/molecules/container/Container.vue';
 import Card from '@/components/molecules/card/Card.vue';
 import { useInfiniteScroll } from '@vueuse/core';
+import { Button } from './ui/button';
+import { ListCard } from './molecules/list-card';
 const el = useTemplateRef<HTMLElement>('el');
 
 const {
@@ -87,8 +141,11 @@ const {
   search,
   duration,
   page,
-  total
+  total,
+  display
 } = useDemos();
+
+console.log('demos', demos);
 
 useInfiniteScroll(
   () => window,

@@ -112,6 +112,10 @@
   --color-sidebar-ring: var(--sidebar-ring);
   --default-font-family: var(--font-avenir);
   --spacing-107: 428px;
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
 }
 
 @layer base {
@@ -139,6 +143,10 @@
     --input: rgb(230, 232, 255); /* #e6e8ff */
     --ring: rgb(32, 38, 210); /* #2026d2 */
     --radius: 0.5rem;
+    --success: rgb(22 100 52); /* #166434 */
+    --success-foreground: rgb(219 252 231); /* #dbfce7 */
+    --warning: rgb(153 27 27); /* #991b1b */
+    --warning-foreground: rgb(255 225 225);
   }
 
   .dark {
