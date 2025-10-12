@@ -36,42 +36,46 @@
     </div>
 
     <div v-if="loading" class="text-gray-500">Loading demos…</div>
-    <div v-else-if="error" class="text-red-600">Error: {{ error }}</div>
 
-    <div v-else-if="!hasResults" class="text-gray-500">No demos found.</div>
+    <div v-if="error" class="text-red-600">Error: {{ error }}</div>
 
-    <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      <a
-        v-for="demo in demos"
-        :key="demo.id"
-        :href="`/demo/${demo.title?.toLowerCase().replace(/\s+/g, '-')}`"
-      >
-        <article
-          class="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition"
+    <div v-else-if="!hasResults && !loading" class="text-gray-500">
+      No demos found.
+    </div>
+
+    <div ref="el">
+      <Container class="mt-6">
+        <a
+          v-for="demo in demos"
+          :key="demo.id"
+          :href="`/demo/${demo.title?.toLowerCase().replace(/\s+/g, '-')}`"
         >
-          <img
-            v-if="demo.thumbnail"
-            :src="demo.thumbnail"
-            :alt="demo.title"
-            class="w-full h-40 object-cover rounded-md mb-3"
-            loading="lazy"
+          <Card
+            :title="demo.title"
+            :thumbnail="demo.thumbnail"
+            :publishedDate="demo.publishedDate"
+            :duration="demo.duration"
+            :filters="demo.filters"
+            :excerpt="demo.excerpt"
           />
-          <h2 class="text-lg font-semibold">{{ demo.title }}</h2>
-          <p class="text-gray-600 text-sm">{{ demo.description }}</p>
-        </article>
-      </a>
+        </a>
+      </Container>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
-import { Input } from './ui/input';
+import { onMounted, useTemplateRef } from 'vue';
+import { Input } from '@/components/ui/input';
 import { useDemos } from '@/store/useDemos';
 import { Search, X } from 'lucide-vue-next';
-import { Chips } from './ui/chips';
-import { Select } from './molecules/select';
+import { Chips } from '@/components/ui/chips';
+import { Select } from '@/components/molecules/select';
 import { sortingChoices, selectDurations } from '@/constants/filtersAndSorts';
+import Container from '@/components/molecules/container/Container.vue';
+import Card from '@/components/molecules/card/Card.vue';
+import { useInfiniteScroll } from '@vueuse/core';
+const el = useTemplateRef<HTMLElement>('el');
 
 const {
   demos,
@@ -81,8 +85,26 @@ const {
   fetchDemos,
   sort,
   search,
-  duration
+  duration,
+  page,
+  total
 } = useDemos();
+
+useInfiniteScroll(
+  () => window,
+  async () => {
+    if (!loading.value && total.value > demos.value.length) {
+      page.value++;
+      await fetchDemos();
+    }
+  },
+  {
+    distance: 10,
+    canLoadMore: () => {
+      return total.value > demos.value.length;
+    }
+  }
+);
 
 onMounted(() => fetchDemos());
 </script>

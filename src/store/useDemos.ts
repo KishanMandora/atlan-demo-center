@@ -11,6 +11,8 @@ const duration = ref<'quick' | 'short' | 'medium' | 'long' | 'depth' | 'all'>(
 );
 const filtersData = ref<{ id: string; label: string; count: number }[]>([]);
 const filters = ref<string[]>([]);
+const page = ref(0);
+const total = ref(0);
 
 let debounceId: ReturnType<typeof setTimeout> | null = null;
 
@@ -19,12 +21,13 @@ async function fetchDemos(query = search.value) {
   error.value = null;
   try {
     const res = await fetch(
-      `/api/demos.json?query=${encodeURIComponent(
-        query
-      )}&sort=${encodeURIComponent(sort.value)}&duration=${encodeURIComponent(
-        duration.value
-      )}&filters=${encodeURIComponent(filters.value.join(','))}`
+      `/api/demos.json?query=${encodeURIComponent(query)}
+      &sort=${encodeURIComponent(sort.value)}
+      &duration=${encodeURIComponent(duration.value)}
+      &filters=${encodeURIComponent(filters.value.join(','))}
+      &page=${page.value}`
     );
+
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
 
@@ -49,7 +52,12 @@ async function fetchDemos(query = search.value) {
         .sort((a, b) => a.id.localeCompare(b.id));
     }
 
-    demos.value = data.items ?? [];
+    if (page.value === 0) {
+      demos.value = data.items ?? [];
+    } else {
+      demos.value.push(...(data.items ?? []));
+    }
+    total.value = data.total;
   } catch (e: any) {
     error.value = e?.message ?? 'Failed to load demos';
   } finally {
@@ -64,14 +72,17 @@ watch(search, (query) => {
 
 // combine sort, duration, and filters
 watch([sort], () => {
+  page.value = 0;
   fetchDemos();
 });
 
 watch([duration], () => {
+  page.value = 0;
   fetchDemos();
 });
 
 watch([filters], () => {
+  page.value = 0;
   fetchDemos();
 });
 
@@ -88,6 +99,8 @@ export function useDemos() {
     filtersData,
     filters,
     hasResults,
-    fetchDemos
+    fetchDemos,
+    total,
+    page
   };
 }

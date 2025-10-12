@@ -9,6 +9,7 @@ export const GET: APIRoute = async ({ request }) => {
   const sort = url.searchParams.get('sort')?.trim() ?? '';
   const duration = url.searchParams.get('duration')?.trim() ?? '';
   const filters = url.searchParams.get('filters')?.trim() ?? '';
+  const page = url.searchParams.get('page')?.trim() ?? '';
 
   const durationRange = durationMap[duration as keyof typeof durationMap];
 
@@ -24,10 +25,12 @@ export const GET: APIRoute = async ({ request }) => {
     ...(filters ? { 'fields.filters[in]': filters } : {}),
     // 'fields.filters[in]': filters,
     // 'fields.targetPersona[in]': 'General',
-    query: search
-    // limit: 10,
-    // skip: 0
+    query: search,
+    limit: 10,
+    skip: page ? parseInt(page) * 10 : 0
   });
+
+  console.log('entries', entries);
 
   const items = entries.items
     .map((e: any) => ({
@@ -45,7 +48,7 @@ export const GET: APIRoute = async ({ request }) => {
       return matchSearch;
     });
 
-  return new Response(JSON.stringify({ items }), {
+  return new Response(JSON.stringify({ items, total: entries.total }), {
     headers: { 'content-type': 'application/json; charset=utf-8' }
   });
 };
