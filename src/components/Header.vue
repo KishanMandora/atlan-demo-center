@@ -55,16 +55,19 @@
 
     <a
       href="https://atlan.com/connectors/?ref=/demos/"
+      target="_blank"
       class="text-sm/6 font-semibold text-gray-900"
       >Connectors</a
     >
     <a
       href="https://atlan.com/resources/?ref=/demos/"
+      target="_blank"
       class="text-sm/6 font-semibold text-gray-900"
       >Resources</a
     >
     <a
       href="https://atlan.com/about/?ref=/demos/"
+      target="_blank"
       class="text-sm/6 font-semibold text-gray-900"
       >Company</a
     >
@@ -130,16 +133,19 @@
             </Disclosure>
             <a
               href="https://atlan.com/connectors/?ref=/demos/"
+              target="_blank"
               class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
               >Connectors</a
             >
             <a
               href="https://atlan.com/resources/?ref=/demos/"
+              target="_blank"
               class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
               >Resources</a
             >
             <a
               href="https://atlan.com/about/?ref=/demos/"
+              target="_blank"
               class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
               >Company</a
             >

@@ -1,5 +1,7 @@
 import { ref, watch, computed } from 'vue';
 
+// type
+
 const demos = ref<any[]>([]); // add type later
 const loading = ref(false);
 const error = ref<string | null>(null);

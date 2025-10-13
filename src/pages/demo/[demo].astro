@@ -18,7 +18,7 @@ const filters = demoData.filters.join(', ');
 
 const url = new URL('/api/demos.json', Astro.url);
 if (filters.length) {
-  url.searchParams.set('filters', filters); // your API already handles this
+  url.searchParams.set('filters', filters);
 }
 
 const res = await fetch(url.toString());

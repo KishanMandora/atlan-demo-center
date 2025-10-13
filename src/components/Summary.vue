@@ -60,12 +60,8 @@ onMounted(async () => {
 
     const data = await res.json();
 
-    console.log('data', data);
-
     summary.value = data.summary;
     visualTags.value = data.visual_tags;
-
-    console.log('visualTags', visualTags.value);
   } catch (e: any) {
     error.value = e?.message ?? 'Failed to get transcript';
   }

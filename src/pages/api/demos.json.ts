@@ -23,28 +23,15 @@ export const GET: APIRoute = async ({ request }) => {
         }
       : {}),
     ...(filters ? { 'fields.filters[in]': filters } : {}),
-    // 'fields.filters[in]': filters,
     // 'fields.targetPersona[in]': 'General',
     query: search,
     limit: 10,
     skip: page ? parseInt(page) * 10 : 0
   });
 
-  const items = entries.items
-    .map((e: any) => ({
-      id: e.sys.id,
-      title: e.fields.title,
-      description: e.fields.description,
-      ...e.fields
-    }))
-    .filter((d: any) => {
-      const matchSearch =
-        !search ||
-        d.title?.toLowerCase().includes(search) ||
-        d.description?.toLowerCase().includes(search);
-
-      return matchSearch;
-    });
+  const items = entries.items.map((e: any) => ({
+    ...e.fields
+  }));
 
   return new Response(JSON.stringify({ items, total: entries.total }), {
     headers: { 'content-type': 'application/json; charset=utf-8' }
