@@ -48,7 +48,7 @@ Your project is organized for scalability and clarity.
 - Direct Navigation to Demo Tour
 
 ## 🏆 Small Wins
-- 100% Lighthouse score
+- **100% Lighthouse score**
   <img width="1509" height="915" alt="Screenshot 2025-10-13 at 6 06 16 PM" src="https://github.com/user-attachments/assets/d13f2198-e57d-45e7-aedb-96cac79a47f6" />
 
 ## 👨🏻‍💻 Scopes for improvemnet
