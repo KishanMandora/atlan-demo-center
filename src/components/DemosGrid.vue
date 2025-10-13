@@ -1,20 +1,20 @@
 <template>
   <div class="p-6">
     <div
-      class="w-full flex gap-2 justify-between items-start sticky top-18 bg-white z-10 lg:flex-row flex-col lg:items-center lg:justify-between"
+      class="w-full flex gap-2 justify-between items-start sticky top-18 bg-white z-10 lg:flex-row flex-col-reverse lg:items-center lg:justify-between"
     >
       <Chips
         v-model="sort"
         :items="sortingChoices"
         name="sort"
-        class="md:w-3/10 lg:w-fit"
+        class="w-full md:w-3/10 lg:w-fit"
       />
-      <div class="relative w-1/2 items-center">
+      <div class="relative w-full md:w-1/2 items-center">
         <Input
           id="search"
           type="text"
           placeholder="Search..."
-          class="pl-10 w-1/2 lg:w-full h-10"
+          class="pl-10 w-full md:w-1/2 lg:w-full h-10"
           v-model="search"
           autocomplete="off"
         />
@@ -37,6 +37,7 @@
         :items="selectDurations"
         placeholder="Duration"
         v-model="duration"
+        class="w-full md:w-1/2 lg:w-fit"
       />
 
       <div class="gap-2 hidden sm:flex">
@@ -124,11 +125,7 @@ import { useDemos } from '@/store/useDemos';
 import { LayoutGrid, Search, TextAlignJustify, X } from 'lucide-vue-next';
 import { Chips } from '@/components/ui/chips';
 import { Select } from '@/components/molecules/select';
-import {
-  sortingChoices,
-  selectDurations,
-  displayOptions
-} from '@/constants/filtersAndSorts';
+import { sortingChoices, selectDurations } from '@/constants/filtersAndSorts';
 import Container from '@/components/molecules/container/Container.vue';
 import Card from '@/components/molecules/card/Card.vue';
 import { useInfiniteScroll } from '@vueuse/core';

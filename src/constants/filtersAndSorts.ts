@@ -3,11 +3,6 @@ export const sortingChoices = [
   { value: 'views', label: 'Popular' }
 ];
 
-export const displayOptions = [
-  { value: 'grid', label: 'Grid' },
-  { value: 'list', label: 'List' }
-];
-
 export const selectDurations = [
   { value: 'all', label: 'All' },
   { value: 'quick', label: '0 - 15 minutes' },

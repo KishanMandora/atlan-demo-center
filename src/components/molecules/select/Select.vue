@@ -1,6 +1,6 @@
 <template>
   <Select>
-    <SelectTrigger class="w-[180px] h-8">
+    <SelectTrigger class="w-full md:w-[180px] h-8">
       <SelectValue :placeholder="placeholder" />
     </SelectTrigger>
     <SelectContent>

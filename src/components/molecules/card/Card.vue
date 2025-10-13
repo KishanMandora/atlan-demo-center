@@ -5,6 +5,7 @@
     <img
       :src="thumbnail"
       alt="Placeholder"
+      loading="lazy"
       class="w-full h-40 object-cover rounded-t-xl"
     />
     <div class="absolute top-0 right-0 pt-2 pr-2 flex gap-2">

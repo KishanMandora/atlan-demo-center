@@ -6,6 +6,7 @@
       <img
         :src="thumbnail"
         alt="Placeholder"
+        loading="lazy"
         class="h-44 min-w-60 max-w-60 object-cover rounded-t-xl"
       />
     </div>
