@@ -46,6 +46,7 @@ Your project is organized for scalability and clarity.
 - Infinite Scroll
 - AI generated Demo Summary
 - Direct Navigation to Demo Tour
+- Transitions for smooth page navigation
 
 ## 🏆 Small Wins
 - **100% Lighthouse score**
