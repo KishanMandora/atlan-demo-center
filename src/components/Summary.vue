@@ -1,5 +1,5 @@
 <template>
-  <div class="border border-gray-200 rounded-md p-4">
+  <div class="rounded-lg p-4 border bg-primary-foreground">
     <Text as="h2" size="text-3xl" weight="font-bold"> Summary </Text>
     <!-- <pre v-if="error" class="text-red-600">{{ error }}</pre> -->
     <div v-if="loading">
@@ -17,25 +17,28 @@
     </div>
   </div>
 
-  <div class="border border-gray-200 rounded-md p-4 mt-10">
+  <div class="rounded-lg p-4 mt-10 border bg-primary-foreground">
     <Text as="h2" size="text-3xl" weight="font-bold"> Visual Tags </Text>
     <div v-if="loading">
       <Skeleton class="w-full h-5 mt-3" />
       <Skeleton class="w-full h-5 mt-3" />
       <Skeleton class="w-full h-5 mt-3" />
     </div>
-    <div v-for="value in visualTags" :key="value">
-      <Text as="p" size="text-sm" weight="font-normal" class="mt-3">
-        {{ value }}
-      </Text>
+    <div class="flex gap-4 flex-wrap">
+      <div v-for="value in visualTags" :key="value">
+        <Badge variant="secondary" class="mt-3">
+          {{ value }}
+        </Badge>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import Text from './ui/Text.vue';
-import Skeleton from './ui/skeleton/Skeleton.vue';
+import Text from '@/components/ui/Text.vue';
+import Skeleton from '@/components/ui/skeleton/Skeleton.vue';
+import Badge from '@/components/ui/badge/Badge.vue';
 interface Props {
   videoUrl: string;
 }
@@ -61,6 +64,8 @@ onMounted(async () => {
 
     summary.value = data.summary;
     visualTags.value = data.visual_tags;
+
+    console.log('visualTags', visualTags.value);
   } catch (e: any) {
     error.value = e?.message ?? 'Failed to get transcript';
   }

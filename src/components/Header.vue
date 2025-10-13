@@ -38,15 +38,6 @@
               :key="item.name"
               class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-gray-50"
             >
-              <div
-                class="flex size-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white"
-              >
-                <component
-                  :is="item.icon"
-                  class="size-6 text-gray-600 group-hover:text-indigo-600"
-                  aria-hidden="true"
-                />
-              </div>
               <div class="flex-auto">
                 <a :href="item.href" class="block font-semibold text-gray-900">
                   {{ item.name }}
@@ -58,33 +49,32 @@
               </div>
             </div>
           </div>
-          <div class="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
-            <a
-              v-for="item in callsToAction"
-              :key="item.name"
-              :href="item.href"
-              class="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100"
-            >
-              <component
-                :is="item.icon"
-                class="size-5 flex-none text-gray-400"
-                aria-hidden="true"
-              />
-              {{ item.name }}
-            </a>
-          </div>
         </PopoverPanel>
       </transition>
     </Popover>
 
-    <a href="#" class="text-sm/6 font-semibold text-gray-900">Features</a>
-    <a href="#" class="text-sm/6 font-semibold text-gray-900">Marketplace</a>
-    <a href="#" class="text-sm/6 font-semibold text-gray-900">Company</a>
+    <a
+      href="https://atlan.com/connectors/?ref=/demos/"
+      class="text-sm/6 font-semibold text-gray-900"
+      >Connectors</a
+    >
+    <a
+      href="https://atlan.com/resources/?ref=/demos/"
+      class="text-sm/6 font-semibold text-gray-900"
+      >Resources</a
+    >
+    <a
+      href="https://atlan.com/about/?ref=/demos/"
+      class="text-sm/6 font-semibold text-gray-900"
+      >Company</a
+    >
   </PopoverGroup>
   <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-    <a href="#" class="text-sm/6 font-semibold text-gray-900"
-      >Log in <span aria-hidden="true">&rarr;</span></a
-    >
+    <a
+      href="https://atlan.com/forms/talk-to-sales-contact/?ref=/demos/"
+      class="text-sm/6 font-semibold bg-muted text-primary rounded-md px-4 py-2"
+      >Book a Demo
+    </a>
   </div>
 
   <Dialog
@@ -101,7 +91,7 @@
           <span class="sr-only">Your Company</span>
           <img
             class="h-8 w-auto dark:hidden"
-            src="../assets/images/atlan-blue.svg"
+            src="/public/atlan-blue.svg"
             alt=""
           />
         </a>
@@ -139,26 +129,26 @@
               </DisclosurePanel>
             </Disclosure>
             <a
-              href="#"
+              href="https://atlan.com/connectors/?ref=/demos/"
               class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-              >Features</a
+              >Connectors</a
             >
             <a
-              href="#"
+              href="https://atlan.com/resources/?ref=/demos/"
               class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-              >Marketplace</a
+              >Resources</a
             >
             <a
-              href="#"
+              href="https://atlan.com/about/?ref=/demos/"
               class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
               >Company</a
             >
           </div>
           <div class="py-6">
             <a
-              href="#"
-              class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-              >Log in</a
+              href="https://atlan.com/forms/talk-to-sales-contact/?ref=/demos/"
+              class="text-sm/6 font-semibold bg-muted text-primary rounded-md px-4 py-2"
+              >Book a Demo</a
             >
           </div>
         </div>
@@ -180,15 +170,7 @@ import {
   PopoverGroup,
   PopoverPanel
 } from '@headlessui/vue';
-import {
-  ArrowPathIcon,
-  Bars3Icon,
-  ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
-  SquaresPlusIcon,
-  XMarkIcon
-} from '@heroicons/vue/24/outline';
+import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline';
 import {
   ChevronDownIcon,
   PhoneIcon,
@@ -197,34 +179,29 @@ import {
 
 const products = [
   {
-    name: 'Analytics',
-    description: 'Get a better understanding of your traffic',
-    href: '#',
-    icon: ChartPieIcon
+    name: 'Data Discovery & Catalog',
+    description: 'Get a better understanding of your data',
+    href: 'https://atlan.com/data-discovery-catalog/?ref=/demos/'
   },
   {
-    name: 'Engagement',
+    name: 'Column Level Lineage',
     description: 'Speak directly to your customers',
-    href: '#',
-    icon: CursorArrowRaysIcon
+    href: 'https://atlan.com/column-level-lineage/?ref=/demos/'
   },
   {
-    name: 'Security',
+    name: 'Connectors',
     description: 'Your customers’ data will be safe and secure',
-    href: '#',
-    icon: FingerPrintIcon
+    href: 'https://atlan.com/connectors/?ref=/demos/'
   },
   {
-    name: 'Integrations',
+    name: 'Intelligent Automation',
     description: 'Connect with third-party tools',
-    href: '#',
-    icon: SquaresPlusIcon
+    href: 'https://atlan.com/intelligent-automation/?ref=/demos/'
   },
   {
     name: 'Automations',
     description: 'Build strategic funnels that will convert',
-    href: '#',
-    icon: ArrowPathIcon
+    href: 'https://atlan.com/app-framework/?ref=/demos/'
   }
 ];
 const callsToAction = [
