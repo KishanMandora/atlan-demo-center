@@ -4,7 +4,7 @@
       {{ label }}
     </h3>
 
-    <div class="space-y-2">
+    <div class="space-y-2 flex flex-row flex-wrap gap-4 sm:block">
       <div
         v-for="item in items"
         :key="item.id"

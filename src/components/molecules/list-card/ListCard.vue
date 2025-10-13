@@ -1,6 +1,6 @@
 <template>
   <Card
-    class="p-0 w-full flex h-44 gap-0 pb-4 overflow-hidden transition-all duration-100 hover:scale-105 relative flex-row"
+    class="p-0 w-full min-w-full flex h-44 gap-0 pb-4 overflow-hidden transition-all duration-100 hover:scale-105 relative flex-row"
   >
     <div class="h-44 w-60">
       <img
@@ -53,7 +53,7 @@
       <CardDescription
         class="px-6 text-muted-foreground text-sm line-clamp-4 mt-auto"
       >
-        {{ excerpt }}
+        {{ description }}
       </CardDescription>
     </div>
   </Card>
@@ -73,7 +73,7 @@ interface Props {
   publishedDate: string;
   duration: number;
   filters: string[];
-  excerpt: string;
+  description: string;
   featured: boolean;
   views: number;
 }

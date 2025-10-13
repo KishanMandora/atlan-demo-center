@@ -1,6 +1,6 @@
 <template>
   <Card
-    class="p-0 min-w-80 w-80 flex h-107 gap-0 pb-4 overflow-hidden transition-all duration-100 hover:scale-105 relative"
+    class="p-0 flex flex-col min-w-60 h-107 gap-0 pb-4 overflow-hidden transition-all duration-100 hover:scale-105 relative flex-1 basis-80"
   >
     <img
       :src="thumbnail"
@@ -16,7 +16,7 @@
       </Badge>
     </div>
     <CardTitle class="px-6 text-lg font-bold mt-3">{{ title }}</CardTitle>
-    <CardContent class="mt-2 px-6">
+    <CardContent class="mt-2 px-6 flex-1">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-2">
           <Calendar class="size-3 text-muted-foreground" />
@@ -50,7 +50,7 @@
     <CardDescription
       class="px-6 text-muted-foreground text-sm line-clamp-4 mt-auto"
     >
-      {{ excerpt }}
+      {{ description }}
     </CardDescription>
   </Card>
 </template>
@@ -69,7 +69,7 @@ interface Props {
   publishedDate: string;
   duration: number;
   filters: string[];
-  excerpt: string;
+  description: string;
   featured: boolean;
   views: number;
 }

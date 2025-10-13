@@ -1,15 +1,20 @@
 <template>
   <div class="p-6">
     <div
-      class="w-full flex gap-2 justify-between items-center sticky top-18 bg-white z-10"
+      class="w-full flex gap-2 justify-between items-start sticky top-18 bg-white z-10 lg:flex-row flex-col lg:items-center lg:justify-between"
     >
-      <Chips v-model="sort" :items="sortingChoices" name="sort" />
+      <Chips
+        v-model="sort"
+        :items="sortingChoices"
+        name="sort"
+        class="md:w-3/10 lg:w-fit"
+      />
       <div class="relative w-1/2 items-center">
         <Input
           id="search"
           type="text"
           placeholder="Search..."
-          class="pl-10 w-full h-10"
+          class="pl-10 w-1/2 lg:w-full h-10"
           v-model="search"
           autocomplete="off"
         />
@@ -34,7 +39,7 @@
         v-model="duration"
       />
 
-      <div class="flex gap-2">
+      <div class="gap-2 hidden sm:flex">
         <Button
           variant="outline"
           size="icon"
@@ -71,7 +76,10 @@
     </div>
 
     <div ref="el">
-      <Container class="mt-6" v-if="display === 'grid'">
+      <Container
+        v-if="display === 'grid'"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full mt-6"
+      >
         <a
           v-for="demo in demos"
           :key="demo.id"
@@ -83,14 +91,17 @@
             :publishedDate="demo.publishedDate"
             :duration="demo.duration"
             :filters="demo.filters"
-            :excerpt="demo.excerpt"
+            :description="demo.description"
             :featured="demo.featured"
             :views="demo.views"
           />
         </a>
       </Container>
 
-      <Container class="mt-6" v-if="display === 'list'">
+      <Container
+        v-if="display === 'list'"
+        class="flex flex-col gap-6 w-full mt-6"
+      >
         <a
           v-for="demo in demos"
           :key="demo.id"
@@ -102,7 +113,7 @@
             :publishedDate="demo.publishedDate"
             :duration="demo.duration"
             :filters="demo.filters"
-            :excerpt="demo.excerpt"
+            :description="demo.description"
             :featured="demo.featured"
             :views="demo.views"
           />

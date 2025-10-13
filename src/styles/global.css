@@ -112,6 +112,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
   --default-font-family: var(--font-avenir);
   --spacing-107: 428px;
+  --spacing-10xl: 1440px;
   --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);
   --color-warning: var(--warning);

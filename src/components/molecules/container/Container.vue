@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-wrap gap-6" :class="class">
+  <div class="w-full" :class="class">
     <slot />
   </div>
 </template>
