@@ -45,6 +45,7 @@ Your project is organized for scalability and clarity.
 - Grid and List View
 - Infinite Scroll
 - AI generated Demo Summary
+- Accessible Keyboard Navigation
 - Direct Navigation to Demo Tour
 - Transitions for smooth page navigation
 
