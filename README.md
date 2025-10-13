@@ -30,12 +30,19 @@ Your project is organized for scalability and clarity.
 
 ## ⚡ Tech Choices:
 
-- Frameworks: Astro (for static data), Vue (for interactivity)
-- Component Library: ShadCn Vue (built on top of reka-ui with tailwind CSS)
+- Frameworks: Astro (Framework optimized for static content) + Vue (framework with fine grained reactivity)
+- Component Library: Shadcn Vue (Component Library built on top of reka-ui - a new updated version of radix-vue with tailwind CSS)
 - CMS: Contentful (easy, fast and maintainable content )
-- CSS: Tailwind CSS
-- State Management: Vue Ref's and Custom Hooks
-- TypeScript (for maintainable code)
+- CSS: Tailwind CSS (Faster development, easy customizations with good performance) 
+- State Management: Vue Ref's  Custom Hooks (simple state management enough for small number of filters)
+- TypeScript (maintainable code)
+- LLM: OpenAI - GPT-5.nano (Provides fast response at less cost for basic tasks such as summarization - a core feature in the app)
+- AI Framework - Langchain (Provides wide range of loaders to help in data extraction)
+- CI/CD - Netlify (easy to use, free of cost ptalform to deploy FE applications)
+
+## 👷 Architectural Decisions:
+- Frontend Architecture: Islands architecture on Home page for faster performance and Demo pages served as Server Rendered Pages (SSR) using On Demand Dynamic Routes for most upto date content and no dependency on Deployment.
+- Component Architecture: UI - Molecules - Organism structure provides hierarchy to the components
 
 ## 🚀 Features
 
