@@ -65,7 +65,7 @@ import { Card } from '@/components/ui/card';
 import { CardTitle } from '@/components/ui/card';
 import { Calendar, Clock4, Star, Flame } from 'lucide-vue-next';
 import { dateToStr } from '@/lib/utils';
-import Text from '@/components/ui/Text.vue';
+import { Text } from '@/components/ui/text';
 import Badge from '@/components/ui/badge/Badge.vue';
 
 interface Props {

@@ -31,7 +31,7 @@
 <script setup lang="ts">
 import CheckboxGroup from '@/components/molecules/checkbox-group/CheckboxGroup.vue';
 import { useDemos } from '@/store/useDemos';
-import Text from '@/components/ui/Text.vue';
+import { Text } from '@/components/ui/text';
 import Skeleton from '@/components/ui/skeleton/Skeleton.vue';
 import { Button } from '@/components/ui/button';
 

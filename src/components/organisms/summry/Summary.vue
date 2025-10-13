@@ -36,7 +36,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import Text from '@/components/ui/Text.vue';
+import { Text } from '@/components/ui/text';
 import Skeleton from '@/components/ui/skeleton/Skeleton.vue';
 import Badge from '@/components/ui/badge/Badge.vue';
 interface Props {
