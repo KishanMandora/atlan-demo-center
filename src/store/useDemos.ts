@@ -78,6 +78,7 @@ watch(search, (query) => {
 
 watch([sort, duration, filters], () => {
   page.value = 0;
+  demos.value = [];
   fetchDemos();
 });
 

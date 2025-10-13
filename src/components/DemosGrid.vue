@@ -67,7 +67,7 @@
       </div>
     </div>
 
-    <div v-if="loading" class="text-gray-500">Loading demos…</div>
+    <!-- <div v-if="loading" class="text-gray-500">Loading demos…</div> -->
 
     <div v-if="error" class="text-red-600">Error: {{ error }}</div>
 
@@ -96,6 +96,7 @@
             :views="demo.views"
           />
         </a>
+        <GridSkeleton v-if="loading" />
       </Container>
 
       <Container
@@ -118,6 +119,7 @@
             :views="demo.views"
           />
         </a>
+        <ListSkeleton v-if="loading" />
       </Container>
     </div>
   </div>
@@ -138,8 +140,10 @@ import {
 import Container from '@/components/molecules/container/Container.vue';
 import Card from '@/components/molecules/card/Card.vue';
 import { useInfiniteScroll } from '@vueuse/core';
-import { Button } from './ui/button';
-import { ListCard } from './molecules/list-card';
+import { Button } from '@/components/ui/button';
+import { ListCard } from '@/components/molecules/list-card';
+import { GridSkeleton } from '@/components/molecules/grid-skeleton';
+import { ListSkeleton } from '@/components/molecules/list-skeleton';
 const el = useTemplateRef<HTMLElement>('el');
 
 const {
@@ -167,7 +171,7 @@ useInfiniteScroll(
     }
   },
   {
-    distance: 10,
+    distance: 700,
     canLoadMore: () => {
       return total.value > demos.value.length;
     }
