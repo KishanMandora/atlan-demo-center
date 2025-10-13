@@ -152,8 +152,6 @@ const {
   display
 } = useDemos();
 
-console.log('demos', demos);
-
 useInfiniteScroll(
   () => window,
   async () => {

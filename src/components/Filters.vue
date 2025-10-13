@@ -31,6 +31,4 @@ import Skeleton from '@/components/ui/skeleton/Skeleton.vue';
 import { Button } from '@/components/ui/button';
 
 const { filtersData, filters } = useDemos();
-
-console.log('filtersData', filtersData);
 </script>

@@ -5,10 +5,10 @@ import Layout from '@/layouts/Layout.astro';
 import Text from '@/components/ui/Text.vue';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/molecules/card';
+import Summary from '@/components/Summary.vue';
 
 let response = await GET(Astro);
 const data = await response.json();
-console.log('astro data', data);
 
 let demoData = data.item.fields;
 
@@ -26,8 +26,6 @@ if (!res.ok) {
   throw new Error(`Failed to fetch demos: ${res.status}`);
 }
 const { items: relatedDemos = [] } = await res.json();
-
-console.log('relatedDemos -----------', relatedDemos);
 
 const relatedDemosList = relatedDemos?.filter(
   (demo: any) => demo.link !== demoData.link
@@ -70,7 +68,7 @@ const relatedDemosList = relatedDemos?.filter(
             {demoData.excerpt}
           </Text>
 
-          <div class="mt-6 flex">
+          <div class="mt-6 flex gap-4">
             <Button variant="default" size="lg">
               <a
                 href="https://atlan.com/forms/talk-to-expert-contact/"
@@ -78,6 +76,15 @@ const relatedDemosList = relatedDemos?.filter(
                 rel="noopener noreferrer"
               >
                 Book a demo
+              </a>
+            </Button>
+            <Button variant="outline" size="lg">
+              <a
+                href="https://atlan.com/demo/welcome/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Explore Demo
               </a>
             </Button>
           </div>
@@ -116,20 +123,8 @@ const relatedDemosList = relatedDemos?.filter(
         </div>
 
         <div class="w-1/3">
-          <div class="border border-secondary-foreground rounded-md p-4">
-            <Text as="h2" size="text-2xl" weight="font-bold">
-              Take a Product Tour
-            </Text>
-
-            <Button variant="outline" size="lg">
-              <a
-                href="https://atlan.com/demo/welcome/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Explore Demo
-              </a>
-            </Button>
+          <div class="rounded-md p-4">
+            <Summary videoUrl={demoData.videoUrl} client:load />
           </div>
         </div>
       </div>
