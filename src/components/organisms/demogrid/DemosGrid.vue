@@ -68,8 +68,6 @@
       </div>
     </div>
 
-    <!-- <div v-if="loading" class="text-gray-500">Loading demos…</div> -->
-
     <div v-if="error" class="text-red-600">Error: {{ error }}</div>
 
     <div v-else-if="!hasResults && !loading" class="text-gray-500">

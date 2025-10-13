@@ -1,7 +1,7 @@
 <template>
   <div class="rounded-lg p-4 border bg-primary-foreground">
     <Text as="h2" size="text-3xl" weight="font-bold"> Summary </Text>
-    <!-- <pre v-if="error" class="text-red-600">{{ error }}</pre> -->
+
     <div v-if="loading">
       <Skeleton class="w-full h-5 mt-3" />
       <Skeleton class="w-full h-5 mt-3" />

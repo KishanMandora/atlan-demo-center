@@ -10,7 +10,6 @@
         :key="item.id"
         class="flex items-center space-x-2"
       >
-        <!-- -->
         <Checkbox
           :disabled="item.disabled"
           :checked="isChecked(item.id)"

@@ -5,7 +5,7 @@ import Layout from '@/layouts/Layout.astro';
 import Text from '@/components/ui/Text.vue';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/molecules/card';
-import Summary from '@/components/Summary.vue';
+import Summary from '@/components/organisms/summry/Summary.vue';
 
 let response = await GET(Astro);
 const data = await response.json();
