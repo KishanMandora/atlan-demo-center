@@ -4,7 +4,12 @@
       <Text as="h2" size="text-lg" weight="font-bold" class="mb-3"
         >Filters</Text
       >
-      <Button variant="outline" @click="filters = []" class="cursor-pointer">
+      <Button
+        variant="outline"
+        @click="filters = []"
+        class="cursor-pointer"
+        :disabled="filters.length === 0"
+      >
         Clear Filters
       </Button>
     </div>
