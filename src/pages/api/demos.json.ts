@@ -4,6 +4,8 @@ import { contentfulClient } from '@/lib/contentful';
 import { durationMap } from '@/constants/filtersAndSorts';
 
 export const GET: APIRoute = async ({ request }) => {
+  console.log('request', request);
+
   const url = new URL(request.url);
   const search = url.searchParams.get('query')?.toLowerCase().trim() ?? '';
   const sort = url.searchParams.get('sort')?.trim() ?? '';

@@ -80,11 +80,7 @@
         v-if="display === 'grid'"
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full mt-6"
       >
-        <a
-          v-for="demo in demos"
-          :key="demo.id"
-          :href="`/demo/${demo.title?.toLowerCase().replace(/\s+/g, '-')}`"
-        >
+        <a v-for="demo in demos" :key="demo.id" :href="`/demo/${demo?.link}`">
           <Card
             :title="demo.title"
             :thumbnail="demo.thumbnail"
@@ -103,11 +99,7 @@
         v-if="display === 'list'"
         class="flex flex-col gap-6 w-full mt-6"
       >
-        <a
-          v-for="demo in demos"
-          :key="demo.id"
-          :href="`/demo/${demo.title?.toLowerCase().replace(/\s+/g, '-')}`"
-        >
+        <a v-for="demo in demos" :key="demo.id" :href="`/demo/${demo?.link}`">
           <ListCard
             :title="demo.title"
             :thumbnail="demo.thumbnail"
