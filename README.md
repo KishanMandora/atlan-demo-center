@@ -1,7 +1,7 @@
 # 🌌 Atlan Demo Center
 
-A modular, CMS-driven web project built with **Astro** and **Vue.js**, combining performance-first architecture with flexible component design.  
-Well suited for Marketing pages that need more reach.
+A modular, CMS-driven web project built with **Astro** and **Vue.js**, combining performance-first architecture with flexible component design, 
+well suited for Marketing pages reaching wide audience.
 
 ## Installation Steps:
    
