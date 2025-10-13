@@ -38,6 +38,7 @@
         placeholder="Duration"
         v-model="duration"
         class="w-full md:w-1/2 lg:w-fit"
+        aria-label="Duration"
       />
 
       <div class="gap-2 hidden sm:flex">
@@ -51,7 +52,11 @@
               : 'active:bg-primary active:text-primary-foreground cursor-pointer'
           "
         >
-          <LayoutGrid class="w-4 h-4" />
+          <LayoutGrid
+            class="w-4 h-4"
+            aria-label="Grid view"
+            focusable="false"
+          />
         </Button>
         <Button
           variant="outline"
@@ -63,7 +68,11 @@
               : 'active:bg-primary active:text-primary-foreground cursor-pointer'
           "
         >
-          <TextAlignJustify class="w-4 h-4" />
+          <TextAlignJustify
+            class="w-4 h-4"
+            aria-label="List view"
+            focusable="false"
+          />
         </Button>
       </div>
     </div>

@@ -1,43 +1,56 @@
-# Astro Starter Kit: Minimal
+# 🌌 Atlan Demo Center
 
-```sh
-npm create astro@latest -- --template minimal
-```
+A modular, CMS-driven web project built with **Astro** and **Vue.js**, combining performance-first architecture with flexible component design.  
+Well suited for Marketing pages that need more reach.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 🏗️ Project Structure
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+Your project is organized for scalability and clarity.  
+(_You can add a project structure screenshot below this section._)
 
 ```text
-/
 ├── public/
 ├── src/
-│   └── pages/
-│       └── index.astro
+|   |── assests
+|   |   |──fonts
+│   ├── components/
+│   │   ├── molecules/
+│   │   ├── organisms/
+│   │   └── ui/
+|   |── constants/
+│   ├── layouts/
+│   ├── lib/
+│   ├── pages/
+│   │   ├── api/
+│   │   └── index.astro
+│   ├── store/
+│   ├── styles/
 └── package.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## ⚡ Tech Choices:
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- Frameworks: Astro (for static data), Vue (for interactivity)
+- Component Library: ShadCn Vue (built on top of reka-ui with tailwind CSS)
+- CMS: Contentful (easy, fast and maintainable content )
+- CSS: Tailwind CSS
+- State Management: Vue Ref's and Custom Hooks
+- TypeScript (for maintainable code)
 
-Any static assets, like images, can be placed in the `public/` directory.
+## 🚀 Features
 
-## 🧞 Commands
+- Searching through the CMS content
+- Filtering based on Topic and Duration
+- Sorting based on Popularity or Recency
+- Grid and List View
+- Infinite Scroll
+- AI generated Demo Summary
+- Direct Navigation to Demo Tour
 
-All commands are run from the root of the project, from a terminal:
+## 👨🏻‍💻 Scopes for improvemnet
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- Streamlining components with a better component library, check [Volt]("https://volt.primevue.org/overview/")
+- Precommit tool for better code qualiy.
+- Virtualization on Card
+- Statically Generate the Demo pages and trigger scheduled deployments
+- TypeScript implementation can be stricter
