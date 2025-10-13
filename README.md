@@ -3,6 +3,25 @@
 A modular, CMS-driven web project built with **Astro** and **Vue.js**, combining performance-first architecture with flexible component design.  
 Well suited for Marketing pages that need more reach.
 
+## Installation Steps:
+   
+```shell
+# Install the Repo
+git@github.com:KishanMandora/atlan-demo-center.git
+
+# Install the packages
+npm i
+
+# Run the Project
+npm run dev
+
+# Build the Project
+npm run build
+
+# View the Build Version
+npm run preview
+```
+
 ## 🏗️ Project Structure
 
 Your project is organized for scalability and clarity.  
