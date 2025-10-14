@@ -85,6 +85,7 @@ Your project is organized for scalability and clarity.
 
 ## 👨🏻‍💻 Scopes for improvemnet
 
+- Add
 - Streamlining components with a better component library, check [Volt]("https://volt.primevue.org/overview/")
 - Precommit tool for better code qualiy.
 - Storybook Integration for enhanced UI component development, documentation, and testing

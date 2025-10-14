@@ -26,6 +26,19 @@
       <Skeleton class="h-4 w-[200px] mb-2" />
       <Skeleton class="h-4 w-[200px] mb-2" />
     </div>
+    <div class="mt-4">
+      <Text as="h2" size="text-lg" weight="font-bold" class="mb-1">
+        User Modes
+      </Text>
+      <div class="flex items-center gap-2">
+        <Switch
+          :model-value="dataAnalystMode"
+          @update:model-value="toggleDataAnalystMode"
+        >
+        </Switch>
+        <Text>Data Analyst Mode</Text>
+      </div>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
@@ -34,6 +47,8 @@ import { useDemos } from '@/store/useDemos';
 import { Text } from '@/components/ui/text';
 import Skeleton from '@/components/ui/skeleton/Skeleton.vue';
 import { Button } from '@/components/ui/button';
+import Switch from '@/components/ui/switch/Switch.vue';
 
-const { filtersData, filters } = useDemos();
+const { filtersData, filters, dataAnalystMode, toggleDataAnalystMode } =
+  useDemos();
 </script>

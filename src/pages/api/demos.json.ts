@@ -10,6 +10,7 @@ export const GET: APIRoute = async ({ request }) => {
   const duration = url.searchParams.get('duration')?.trim() ?? '';
   const filters = url.searchParams.get('filters')?.trim() ?? '';
   const page = url.searchParams.get('page')?.trim() ?? '';
+  const persona = url.searchParams.get('persona')?.trim() ?? '';
 
   const durationRange = durationMap[duration as keyof typeof durationMap];
 
@@ -23,7 +24,7 @@ export const GET: APIRoute = async ({ request }) => {
         }
       : {}),
     ...(filters ? { 'fields.filters[in]': filters } : {}),
-    // 'fields.targetPersona[in]': 'General',
+    ...(persona ? { 'fields.targetPersona[in]': persona } : {}),
     query: search,
     limit: 10,
     skip: page ? parseInt(page) * 10 : 0

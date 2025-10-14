@@ -1,8 +1,6 @@
 import { ref, watch, computed } from 'vue';
 
-// type
-
-const demos = ref<any[]>([]); // add type later
+const demos = ref<Record<string, any>[]>([]);
 const loading = ref(false);
 const error = ref<string | null>(null);
 
@@ -18,6 +16,7 @@ const filtersData = ref<{ id: string; label: string; count: number }[]>([]);
 const filters = ref<string[]>([]);
 const page = ref(0);
 const total = ref(0);
+const dataAnalystMode = ref(false);
 
 let debounceId: ReturnType<typeof setTimeout> | null = null;
 
@@ -25,14 +24,14 @@ async function fetchDemos(query = search.value) {
   loading.value = true;
   error.value = null;
   try {
-    const filtersRes = await fetch('/api/filters.json');
-    const filteredData = await filtersRes.json();
-
     const res = await fetch(
       `/api/demos.json?query=${encodeURIComponent(query)}
       &sort=${encodeURIComponent(sort.value)}
       &duration=${encodeURIComponent(duration.value)}
       &filters=${encodeURIComponent(filters.value.join(','))}
+      &persona=${encodeURIComponent(
+        dataAnalystMode.value ? 'Data Analyst' : ''
+      )}
       &page=${page.value}`
     );
 
@@ -40,6 +39,8 @@ async function fetchDemos(query = search.value) {
     const data = await res.json();
 
     if (!filtersData.value.length) {
+      const filtersRes = await fetch('/api/filters.json');
+      const filteredData = await filtersRes.json();
       const filtersResult = (filteredData.items ?? []).reduce(
         (acc: Record<string, number>, item: any) => {
           const filters = item.filters || [];
@@ -78,7 +79,7 @@ watch(search, (query) => {
   debounceId = setTimeout(() => fetchDemos(query), 400);
 });
 
-watch([sort, duration, filters], () => {
+watch([sort, duration, filters, dataAnalystMode], () => {
   page.value = 0;
   demos.value = [];
   fetchDemos();
@@ -89,6 +90,9 @@ watch(display, (val) => {
 });
 
 const hasResults = computed(() => !loading.value && demos.value.length > 0);
+const toggleDataAnalystMode = () => {
+  dataAnalystMode.value = !dataAnalystMode.value;
+};
 
 export function useDemos() {
   return {
@@ -104,6 +108,8 @@ export function useDemos() {
     fetchDemos,
     total,
     page,
-    display
+    display,
+    dataAnalystMode,
+    toggleDataAnalystMode
   };
 }
