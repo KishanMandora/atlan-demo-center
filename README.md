@@ -69,7 +69,7 @@ Your project is organized for scalability and clarity.
 ## 🚀 Features
 
 - Searching through the CMS content
-- Filtering based on Topic and Duration
+- Filtering based on Topic, Duration and Data Analyst Mode.
 - Sorting based on Popularity or Recency
 - Grid and List View
 - Infinite Scroll
@@ -85,7 +85,6 @@ Your project is organized for scalability and clarity.
 
 ## 👨🏻‍💻 Scopes for improvemnet
 
-- Add
 - Streamlining components with a better component library, check [Volt]("https://volt.primevue.org/overview/")
 - Precommit tool for better code qualiy.
 - Storybook Integration for enhanced UI component development, documentation, and testing
