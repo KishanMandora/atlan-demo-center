@@ -94,7 +94,7 @@
           <span class="sr-only">Your Company</span>
           <img
             class="h-8 w-auto dark:hidden"
-            src="/public/atlan-blue.svg"
+            src="/public/images/atlan-blue.svg"
             alt=""
           />
         </a>

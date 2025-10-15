@@ -89,5 +89,6 @@ Your project is organized for scalability and clarity.
 - Precommit tool for better code qualiy.
 - Storybook Integration for enhanced UI component development, documentation, and testing
 - Virtualization on Cards for improved DOM performance
+- Responsive image optimization using `srcset` for better loading and performance
 - Statically Generate the Demo pages in conjuction with trigger scheduled deployments for better performance
 - Stricter TypeScript implementation for better code mantainance.
