@@ -53,7 +53,7 @@ Your project is organized for scalability and clarity.
 - Component Library: Shadcn Vue (Component Library built on top of reka-ui - a new updated version of radix-vue with tailwind CSS)
 - CMS: Contentful (Easy, fast, widely used Headless CMS that can scale easily)
 - CSS: Tailwind CSS (Faster development, easy customizations with good performance)
-- State Management: Vue Ref's Custom Hooks (simple state management enough for small number of filters)
+- State Management: Vue Ref's Custom Composables (simple state management enough for small number of filters)
 - TypeScript (maintainable code)
 - LLM: OpenAI - GPT-5.nano (Provides fast response at less cost for basic tasks such as summarization - a core feature in the app)
 - AI Framework - Langchain (Provides wide range of loaders to help in data extraction)
