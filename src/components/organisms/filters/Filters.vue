@@ -34,6 +34,7 @@
         <Switch
           :model-value="dataAnalystMode"
           @update:model-value="toggleDataAnalystMode"
+          aria-label="Data Analyst Mode"
         >
         </Switch>
         <Text>Data Analyst Mode</Text>
