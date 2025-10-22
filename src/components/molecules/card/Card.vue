@@ -49,7 +49,8 @@
       </div>
     </CardContent>
     <CardDescription
-      class="px-6 text-muted-foreground text-sm line-clamp-4 mt-auto"
+      class="px-6 text-muted-foreground text-sm mt-auto"
+      :class="clamps || 'line-clamp-4'"
     >
       {{ description }}
     </CardDescription>
@@ -73,6 +74,7 @@ interface Props {
   description: string;
   featured: boolean;
   views: number;
+  clamps?: 'line-clamp-2' | 'line-clamp-3' | 'line-clamp-4' | 'line-clamp-5';
 }
 
 defineProps<Props>();
