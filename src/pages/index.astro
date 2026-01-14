@@ -1,16 +1,61 @@
 ---
+import Layout from '@/layouts/Layout.astro';
+import DemosGrid from '@/components/organisms/demogrid/DemosGrid.vue';
+import { Text } from '@/components/ui/text';
+import Filters from '@/components/organisms/filters/Filters.vue';
+
 const title = 'Atlan Demo Center';
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.png" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+    <meta
+      name="description"
+      content="Atlan Demo Center | Experience Atlan in Action"
+    />
+    <meta
+      name="keywords"
+      content="Atlan, Demo Center, Demo, Atlan Demo Center, Atlan in action"
+    />
+    <meta name="author" content="Atlan" />
+    <meta name="robots" content="index, follow" />
+    <meta name="sitemap" content="https://atlan.com/sitemap.xml" />
     <title>{title}</title>
   </head>
   <body>
-    <h1>{title}</h1>
+    <Layout>
+      <div
+        class="bg-center bg-cover bg-primary opacity-100 py-15"
+        style="background-image:url(/images/hero-bg.svg);"
+      >
+        <Text
+          as="h1"
+          size="text-6xl"
+          color="text-secondary"
+          weight="font-bold"
+          align="text-center"
+          class="w-4/5 sm:w-2/5 mx-auto mt-4"
+        >
+          Experience Atlan in action.
+        </Text>
+      </div>
+
+      <div class="w-9/10 max-w-10xl mx-auto sm:flex min-h-8/12 h-full">
+        <div class="bg-inherit h-0 sm:h-[700px] visibility-hidden w-0"></div>
+        <div class="w-full sm:w-1/5 px-3">
+          <div class="w-full sticky top-18 bg-white z-10">
+            <Filters client:only="vue" />
+          </div>
+        </div>
+
+        <div class="w-full sm:w-4/5">
+          <DemosGrid client:only="vue" />
+        </div>
+      </div>
+    </Layout>
   </body>
 </html>

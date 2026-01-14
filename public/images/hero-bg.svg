@@ -1,0 +1,42 @@
+<!-- /src/assets/ripple-bg-responsive.svg -->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 1280 432"
+     preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="paint0_radial_0_19" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(1229.54 394.115) rotate(32.5718) scale(657.772 1265.35)">
+      <stop offset="0.166665" stop-color="#2626D2"/>
+      <stop offset="0.880238" stop-color="#0094FF"/>
+    </radialGradient>
+    <radialGradient id="paint1_radial_0_19" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(1283.12 401.632) rotate(32.6158) scale(437.162 841.564)">
+      <stop offset="0.166665" stop-color="#2626D2"/>
+      <stop offset="0.880238" stop-color="#0094FF"/>
+    </radialGradient>
+
+    <!-- ripple set we can reuse -->
+    <g id="ripples" opacity="0.6">
+      <path opacity="0.7"
+        d="M1738.18 484.088C1738.18 729.351 1539.35 928.175 1294.09 928.175C1048.82 928.175 850 729.351 850 484.088C850 238.825 1048.82 40 1294.09 40C1539.35 40 1738.18 238.825 1738.18 484.088Z"
+        fill="url(#paint0_radial_0_19)"/>
+      <path opacity="0.7"
+        d="M1621 461.5C1621 624.7 1488.92 757 1326 757C1163.08 757 1031 624.7 1031 461.5C1031 298.3 1163.08 166 1326 166C1488.92 166 1621 298.3 1621 461.5Z"
+        fill="url(#paint1_radial_0_19)"/>
+    </g>
+
+    <clipPath id="clip">
+      <rect width="1280" height="432" />
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#clip)">
+    <!-- background -->
+    <rect width="1280" height="432" fill="#2026D2"/>
+
+    <!-- right-side ripples -->
+    <use href="#ripples"/>
+
+    <!-- left-side ripples (mirrored) -->
+    <use href="#ripples" transform="translate(1280,0) scale(-1,1)"/>
+  </g>
+</svg>

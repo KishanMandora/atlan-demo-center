@@ -1,0 +1,115 @@
+import { ref, watch, computed } from 'vue';
+
+const demos = ref<Record<string, any>[]>([]);
+const loading = ref(false);
+const error = ref<string | null>(null);
+
+const search = ref('');
+const sort = ref<'views' | 'publishedDate'>('publishedDate');
+const duration = ref<'quick' | 'short' | 'medium' | 'long' | 'depth' | 'all'>(
+  'all'
+);
+const display = ref<'grid' | 'list'>(
+  (localStorage.getItem('display') as 'grid' | 'list') || 'grid'
+);
+const filtersData = ref<{ id: string; label: string; count: number }[]>([]);
+const filters = ref<string[]>([]);
+const page = ref(0);
+const total = ref(0);
+const dataAnalystMode = ref(false);
+
+let debounceId: ReturnType<typeof setTimeout> | null = null;
+
+async function fetchDemos(query = search.value) {
+  loading.value = true;
+  error.value = null;
+  try {
+    const res = await fetch(
+      `/api/demos.json?query=${encodeURIComponent(query)}
+      &sort=${encodeURIComponent(sort.value)}
+      &duration=${encodeURIComponent(duration.value)}
+      &filters=${encodeURIComponent(filters.value.join(','))}
+      &persona=${encodeURIComponent(
+        dataAnalystMode.value ? 'Data Analyst' : ''
+      )}
+      &page=${page.value}`
+    );
+
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+
+    if (!filtersData.value.length) {
+      const filtersRes = await fetch('/api/filters.json');
+      const filteredData = await filtersRes.json();
+      const filtersResult = (filteredData.items ?? []).reduce(
+        (acc: Record<string, number>, item: any) => {
+          const filters = item.filters || [];
+          filters.forEach((filter: string) => {
+            acc[filter] = (acc[filter] ?? 0) + 1;
+          });
+          return acc;
+        },
+        {}
+      );
+
+      filtersData.value = Object.entries(filtersResult)
+        .map(([filter, count]) => ({
+          id: filter,
+          label: filter,
+          count: count as number
+        }))
+        .sort((a, b) => a.id.localeCompare(b.id));
+    }
+
+    if (page.value === 0) {
+      demos.value = data.items ?? [];
+    } else {
+      demos.value.push(...(data.items ?? []));
+    }
+    total.value = data.total;
+  } catch (e: any) {
+    error.value = e?.message ?? 'Failed to load demos';
+  } finally {
+    loading.value = false;
+  }
+}
+
+watch(search, (query) => {
+  if (debounceId) clearTimeout(debounceId);
+  debounceId = setTimeout(() => fetchDemos(query), 400);
+});
+
+watch([sort, duration, filters, dataAnalystMode], () => {
+  page.value = 0;
+  demos.value = [];
+  fetchDemos();
+});
+
+watch(display, (val) => {
+  localStorage.setItem('display', val);
+});
+
+const hasResults = computed(() => !loading.value && demos.value.length > 0);
+const toggleDataAnalystMode = () => {
+  dataAnalystMode.value = !dataAnalystMode.value;
+};
+
+export function useDemos() {
+  return {
+    demos,
+    loading,
+    error,
+    search,
+    sort,
+    duration,
+    filtersData,
+    filters,
+    hasResults,
+    fetchDemos,
+    total,
+    page,
+    display,
+    dataAnalystMode,
+    toggleDataAnalystMode
+  };
+}
